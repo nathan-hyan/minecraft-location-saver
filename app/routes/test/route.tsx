@@ -1,6 +1,4 @@
 function route() {
-  return (
-    <div>This is a route inside a folder</div>
-  )
+  return <div>This is a route inside a folder</div>;
 }
-export default route
+export default route;
