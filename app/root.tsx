@@ -31,8 +31,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      
+      <body className='container mx-auto'>
+        <nav className='bg-sky-950 rounded-b-lg p-7 text-center mb-8'>
+          <h1>test</h1>
+        </nav>
+        
+        <main>
+          {children}
+        </main>
+
         <ScrollRestoration />
         <Scripts />
       </body>
