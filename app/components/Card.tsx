@@ -1,27 +1,9 @@
 import { calculateCoordinates } from '~/utils';
 import Chip from './Chip';
+import { type Location } from '../types';
 
 interface Props {
-  location: {
-    id: number;
-    title: string;
-    description: string;
-    screenshotSrc: string;
-    realm: 'overworld' | 'nether' | 'end';
-    type:
-      | 'mountain'
-      | 'village'
-      | 'cave'
-      | 'desert'
-      | 'ocean'
-      | 'swamp'
-      | 'plains';
-    coordinates: {
-      x: number;
-      y: number;
-      z: number;
-    };
-  };
+  location: Location;
 }
 
 function Card({

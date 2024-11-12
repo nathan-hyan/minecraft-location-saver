@@ -8,6 +8,10 @@ import {
 import type { LinksFunction } from '@remix-run/node';
 
 import './tailwind.css';
+import NavigationBar from './components/NavigationBar';
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -23,6 +27,17 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 60,
+          },
+        },
+      })
+  );
+
   return (
     <html lang='en'>
       <head>
@@ -33,21 +48,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
 
       <body className='container mx-auto'>
-        <nav className='relative mb-8 flex flex-col justify-center rounded-b-lg bg-sky-950 p-7'>
-          <img
-            src='https://minecraft.wiki/images/Minecraft_logo_2.svg?eeb79&format=original'
-            alt='Minecraft Logo from Wiki'
-            className={'h-16'}
+        <QueryClientProvider client={queryClient}>
+          <NavigationBar />
+
+          <main>{children}</main>
+
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition={'bottom-left'}
           />
-          <p className='absolute bottom-5 left-1/2 animate-expand text-center font-Minecraftia text-yellow-400'>
-            This is some placeholder text!
-          </p>
-        </nav>
 
-        <main>{children}</main>
-
-        <ScrollRestoration />
-        <Scripts />
+          <ScrollRestoration />
+          <Scripts />
+        </QueryClientProvider>
       </body>
     </html>
   );
