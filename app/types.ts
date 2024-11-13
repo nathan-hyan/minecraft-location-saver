@@ -10,6 +10,6 @@ export interface Location {
 
 export interface Coordinates {
   x: number;
-  y: number;
+  y?: number;
   z: number;
 }
