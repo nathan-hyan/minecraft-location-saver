@@ -6,7 +6,7 @@ function NavigationBar() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const {pathname} = useLocation();
-  const [splash, setSplash] = useState('This splash aint ready yet!');
+  const [splash, setSplash] = useState('If you\'re reading this, don\'t!');
 
   useEffect(() => {
     const splashText = getSplashText(pathname);
