@@ -1,4 +1,19 @@
 import { type Location } from '../types';
 
-export const getLocations: () => Promise<Location[]> = () =>
-  fetch('http://localhost:3000/locations').then((res) => res.json());
+interface Props {
+  currentPage: number;
+  pageSize: number;
+}
+
+export const getLocations: (props: Props) => Promise<{
+  first: number;
+  prev: number | null;
+  next: number;
+  last: number;
+  pages: number;
+  items: number;
+  data: Location[];
+}> = ({ currentPage, pageSize }) =>
+  fetch(
+    `http://localhost:3000/locations?_page=${currentPage ?? 1}&_per_page=${pageSize ?? 10}`
+  ).then((res) => res.json());

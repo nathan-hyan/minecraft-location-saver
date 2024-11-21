@@ -9,9 +9,6 @@ import type { LinksFunction } from '@remix-run/node';
 
 import './tailwind.css';
 import NavigationBar from './components/NavigationBar';
-import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -27,17 +24,6 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 1000 * 60,
-          },
-        },
-      })
-  );
-
   return (
     <html lang='en'>
       <head>
@@ -48,19 +34,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
 
       <body className='container mx-auto'>
-        <QueryClientProvider client={queryClient}>
-          <NavigationBar />
+        <NavigationBar />
 
-          <main>{children}</main>
+        <main>{children}</main>
 
-          <ReactQueryDevtools
-            initialIsOpen={false}
-            buttonPosition={'bottom-left'}
-          />
-
-          <ScrollRestoration />
-          <Scripts />
-        </QueryClientProvider>
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
   );

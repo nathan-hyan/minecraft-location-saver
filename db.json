@@ -1,7 +1,7 @@
 {
   "locations": [
     {
-      "id": "0",
+      "id": "random_id_123546",
       "title": "Montaña que me gusta",
       "description": "La captura la saqué de reddit, me pareció apropiada y bueno... la usé",
       "screenshotSrc": "https://preview.redd.it/ebx3u9ub1yq51.png?auto=webp&s=19e99d66ab8992e913641e6f72810063790e201f",
@@ -103,6 +103,72 @@
         "y": 1,
         "z": 1
       }
+    },
+    {
+      "id": "4ffd",
+      "title": "Test",
+      "description": "Test",
+      "screenshotSrc": "undefined",
+      "realm": "overworld",
+      "type": "mineshaft",
+      "coordinates": {
+        "x": 1,
+        "z": 2
+      },
+      "createdAt": "2024-11-14T19:01:39.273Z"
+    },
+    {
+      "id": "d768",
+      "title": "Linkin Park",
+      "description": "Emily",
+      "screenshotSrc": "undefined",
+      "realm": "nether",
+      "type": "woodland_mansion",
+      "coordinates": {
+        "x": 300,
+        "y": 2,
+        "z": 231
+      },
+      "createdAt": "2024-11-15T17:34:32.856Z"
+    },
+    {
+      "id": "413b",
+      "title": "Testing without RQ",
+      "description": "Lets see",
+      "screenshotSrc": "undefined",
+      "realm": "end",
+      "type": "ancient_city",
+      "coordinates": {
+        "x": 1,
+        "z": 3
+      },
+      "createdAt": "2024-11-20T16:27:10.731Z"
+    },
+    {
+      "id": "6b13",
+      "title": "Should redirect as expected",
+      "description": "asd",
+      "screenshotSrc": "undefined",
+      "realm": "overworld",
+      "type": "trial_chambers",
+      "coordinates": {
+        "x": 123,
+        "z": 321
+      },
+      "createdAt": "2024-11-20T16:28:16.327Z"
+    },
+    {
+      "id": "8090",
+      "title": "And once created",
+      "description": "should just work",
+      "screenshotSrc": "undefined",
+      "realm": "end",
+      "type": "trail_ruins",
+      "coordinates": {
+        "x": 123,
+        "z": 321
+      },
+      "createdAt": "2024-11-20T16:28:41.249Z"
     }
   ]
 }

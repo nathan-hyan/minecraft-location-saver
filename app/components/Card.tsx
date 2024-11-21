@@ -16,8 +16,8 @@ function Card({
     coordinates: { x, y, z },
   },
 }: Props) {
-  const displayCoordinates = `${x} / ${y} / ${z}`;
-  const contraryCoordinates = calculateCoordinates(x, y, z, realm);
+  const displayCoordinates = `${x} / ${y ?? '~'} / ${z}`;
+  const contraryCoordinates = calculateCoordinates(x, z, realm, y);
   const displayContraryRealmCoordinates = `${contraryCoordinates.x} / ${contraryCoordinates.y} / ${contraryCoordinates.z}`;
 
   return (

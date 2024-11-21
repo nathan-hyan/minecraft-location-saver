@@ -1,10 +1,13 @@
+import { Realms } from './types';
+
 export const calculateCoordinates = (
   x: number,
-  y: number,
   z: number,
-  realm: 'overworld' | 'nether' | 'end'
+  realm: Realms,
+  y?: number
 ) => {
-  if (realm === 'end') {
+  // Any to End
+  if (realm === Realms.end) {
     return {
       x: '~',
       y: '~',
@@ -12,17 +15,19 @@ export const calculateCoordinates = (
     };
   }
 
-  if (realm === 'nether') {
+  // Nether > Overworld
+  if (realm === Realms.nether) {
     return {
       x: x / 8,
-      y,
+      y: y ?? '~',
       z: z / 8,
     };
   }
 
+  // Overworld > Nether
   return {
     x: x * 8,
-    y,
+    y: y ?? '~',
     z: z * 8,
   };
 };
