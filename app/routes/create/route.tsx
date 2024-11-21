@@ -50,7 +50,7 @@ export default function route() {
     <Form method='post'>
       <main className='flex flex-row justify-center gap-8'>
         <div className='w-1/2 rounded-xl bg-slate-800 p-4'>
-          <input type="text" name='screenshotSrc' hidden value={base64}/>
+          <input type="text" name='screenshotSrc' hidden value={base64} readOnly/>
           
           {base64.length < 1 ? <div className='border-2 border-gray-500 p-4 rounded-xl aspect-video flex justify-center items-center font-bold text-gray-500'>No image loaded</div> : <img src={base64} className='aspect-video w-full rounded-xl object-cover'/>}
           <input type='file' name='image' accept='image/*' onChange={handleImageOnChange} required className='font-poppins mt-6 border-2 border-gray-500 p-4 rounded-xl w-full text-center'/>
