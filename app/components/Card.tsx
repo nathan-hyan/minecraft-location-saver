@@ -47,7 +47,7 @@ function Card({
 
       <div className='flex gap-2'>
         <Chip variant='success'>{realm}</Chip>
-        <Chip variant='error'>{type}</Chip>
+        {type && <Chip variant='error'>{type}</Chip>}
       </div>
     </div>
   );

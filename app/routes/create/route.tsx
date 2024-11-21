@@ -1,7 +1,6 @@
 import { Form, redirect, useNavigate } from '@remix-run/react';
-import Button from '~/components/Button';
-import Input from '~/components/Input';
-import Select from '~/components/Select';
+import { useState } from 'react';
+import { Button, Input, Select } from '~/components';
 import { CONSTRUCTION_TYPES, REALMS } from '~/constants';
 import { ConstructionTypes, Location, Realms } from '~/types';
 
@@ -32,13 +31,29 @@ export async function action({ request }: { request: Request }) {
 }
 
 export default function route() {
+  const [base64, setBase64] = useState('') 
   const navigate = useNavigate();
+
+  const handleImageOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const base64 = (e.target as FileReader).result as string;
+        setBase64(base64)
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <Form method='post'>
       <main className='flex flex-row justify-center gap-8'>
         <div className='w-1/2 rounded-xl bg-slate-800 p-4'>
-          <input type='file' name='image' accept='image/*' />
+          <input type="text" name='screenshotSrc' hidden value={base64}/>
+          
+          {base64.length < 1 ? <div className='border-2 border-gray-500 p-4 rounded-xl aspect-video flex justify-center items-center font-bold text-gray-500'>No image loaded</div> : <img src={base64} className='aspect-video w-full rounded-xl object-cover'/>}
+          <input type='file' name='image' accept='image/*' onChange={handleImageOnChange} required className='font-poppins mt-6 border-2 border-gray-500 p-4 rounded-xl w-full text-center'/>
         </div>
 
         <div className='flex flex-col gap-4 rounded-xl bg-slate-800 p-4'>
@@ -59,7 +74,6 @@ export default function route() {
             name='type'
             label='Construction Type'
             options={CONSTRUCTION_TYPES}
-            required
           />
           <div className='flex flex-col gap-2'>
             <p>Coordinates:</p>

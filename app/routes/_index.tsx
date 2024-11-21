@@ -4,8 +4,7 @@ import { LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
 import { json, useLoaderData } from '@remix-run/react';
 
 import { getLocations } from './utils';
-import FloatingButton from '~/components/FloatingButton';
-import ControlPanel from '~/components/ControlPanel';
+import { ControlPanel, FloatingButton } from '~/components';
 
 export const meta: MetaFunction = () => {
   return [
