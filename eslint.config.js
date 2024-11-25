@@ -4,7 +4,6 @@ import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import tailwind from 'eslint-plugin-tailwindcss';
-import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
@@ -14,7 +13,6 @@ export default [
   pluginReact.configs.flat.recommended,
   ...tailwind.configs['flat/recommended'],
   eslintPluginPrettierRecommended,
-  ...pluginQuery.configs['flat/recommended'],
   {
     rules: {
       'react/react-in-jsx-scope': 'off',

@@ -1,4 +1,4 @@
-import { Form, redirect, useNavigate } from '@remix-run/react';
+import { Form, redirect, useNavigate, useNavigation } from '@remix-run/react';
 import { useState } from 'react';
 import { Button, Input, Select } from '~/components';
 import { CONSTRUCTION_TYPES, REALMS } from '~/constants';
@@ -31,8 +31,11 @@ export async function action({ request }: { request: Request }) {
 }
 
 export default function route() {
-  const [base64, setBase64] = useState('') 
+  const [base64, setBase64] = useState('');
   const navigate = useNavigate();
+  const { state } = useNavigation();
+
+  const isSubmitting = state === 'submitting';
 
   const handleImageOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -40,7 +43,7 @@ export default function route() {
       const reader = new FileReader();
       reader.onload = (e) => {
         const base64 = (e.target as FileReader).result as string;
-        setBase64(base64)
+        setBase64(base64);
       };
       reader.readAsDataURL(file);
     }
@@ -50,10 +53,33 @@ export default function route() {
     <Form method='post'>
       <main className='flex flex-row justify-center gap-8'>
         <div className='w-1/2 rounded-xl bg-slate-800 p-4'>
-          <input type="text" name='screenshotSrc' hidden value={base64} readOnly/>
-          
-          {base64.length < 1 ? <div className='border-2 border-gray-500 p-4 rounded-xl aspect-video flex justify-center items-center font-bold text-gray-500'>No image loaded</div> : <img src={base64} className='aspect-video w-full rounded-xl object-cover'/>}
-          <input type='file' name='image' accept='image/*' onChange={handleImageOnChange} required className='font-poppins mt-6 border-2 border-gray-500 p-4 rounded-xl w-full text-center'/>
+          <input
+            type='text'
+            name='screenshotSrc'
+            hidden
+            value={base64}
+            readOnly
+          />
+
+          {base64.length < 1 ? (
+            <div className='flex aspect-video items-center justify-center rounded-xl border-2 border-gray-500 p-4 font-bold text-gray-500'>
+              No image loaded
+            </div>
+          ) : (
+            <img
+              src={base64}
+              className='aspect-video w-full rounded-xl object-cover'
+            />
+          )}
+
+          <input
+            type='file'
+            name='image'
+            accept='image/*'
+            onChange={handleImageOnChange}
+            required
+            className='mt-6 w-full rounded-xl border-2 border-gray-500 p-4 text-center'
+          />
         </div>
 
         <div className='flex flex-col gap-4 rounded-xl bg-slate-800 p-4'>
@@ -86,10 +112,14 @@ export default function route() {
         </div>
       </main>
       <footer className='mt-8 flex w-full justify-center gap-8 rounded-xl bg-slate-800 p-4'>
-        <Button variant='success' type='submit'>
-          Create Location
+        <Button variant='success' type='submit' disabled={isSubmitting}>
+          {isSubmitting ? 'Creating...' : 'Create Location'}
         </Button>
-        <Button variant='outlined-error' onClick={() => navigate('/')}>
+        <Button
+          variant='outlined-error'
+          onClick={() => navigate('/')}
+          disabled={isSubmitting}
+        >
           Cancel
         </Button>
       </footer>
