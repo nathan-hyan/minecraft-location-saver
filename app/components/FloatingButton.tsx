@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from '@remix-run/react';
+import { useNavigate } from 'react-router';
 
 function FloatingButton() {
   const navigate = useNavigate();

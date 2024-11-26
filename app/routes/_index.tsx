@@ -1,7 +1,7 @@
 import Card from '~/components/Card';
-import { LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
+import { LoaderFunctionArgs, type MetaFunction } from 'react-router';
 
-import { json, useLoaderData, useNavigation } from '@remix-run/react';
+import { useLoaderData, useNavigation } from 'react-router';
 
 import { getLocations } from './utils';
 import { ControlPanel, FloatingButton } from '~/components';
@@ -25,10 +25,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     pageSize,
   });
 
-  return json({
+  return {
     locations: locations.data,
     params: { pageSize, currentPage, totalPages: locations.pages },
-  });
+  };
 }
 
 export default function Index() {

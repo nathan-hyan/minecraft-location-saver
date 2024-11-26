@@ -1,6 +1,9 @@
 import { calculateCoordinates } from '~/utils';
 import Chip from './Chip';
 import { type Location } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router';
 
 interface Props {
   location: Location;
@@ -8,6 +11,7 @@ interface Props {
 
 function Card({
   location: {
+    id,
     title,
     description,
     screenshotSrc,
@@ -16,6 +20,8 @@ function Card({
     coordinates: { x, y, z },
   },
 }: Props) {
+  const navigate = useNavigate();
+
   const displayCoordinates = `${x} / ${y ?? '~'} / ${z}`;
   const contraryCoordinates = calculateCoordinates(x, z, realm, y);
   const displayContraryRealmCoordinates = `${contraryCoordinates.x} / ${contraryCoordinates.y} / ${contraryCoordinates.z}`;
@@ -45,9 +51,17 @@ function Card({
         </div>
       </div>
 
-      <div className='flex gap-2'>
-        <Chip variant='success'>{realm}</Chip>
-        {type && <Chip variant='error'>{type}</Chip>}
+      <div className='flex justify-between'>
+        <div className='flex gap-2'>
+          <Chip variant='success'>{realm}</Chip>
+          {type && <Chip variant='warning'>{type}</Chip>}
+        </div>
+        <Chip variant='info' className='cursor-pointer'>
+          <FontAwesomeIcon
+            icon={faEdit}
+            onClick={() => navigate(`/edit/${id}`)}
+          />
+        </Chip>
       </div>
     </div>
   );

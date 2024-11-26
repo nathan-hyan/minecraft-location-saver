@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useSearchParams } from '@remix-run/react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router';
 import { getSplashText } from './utils';
 import { useEffect, useState } from 'react';
 
