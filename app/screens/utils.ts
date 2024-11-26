@@ -17,3 +17,13 @@ export const getLocations: (props: Props) => Promise<{
   fetch(
     `http://localhost:3000/locations?_page=${currentPage ?? 1}&_per_page=${pageSize ?? 10}`
   ).then((res) => res.json());
+
+export const getSingleLocation: (id: string) => Promise<Location> = (id) =>
+  fetch(`http://localhost:3000/locations/${id}`).then((res) => {
+    if (res.status !== 200)
+      throw new Response('Failed to fetch location, make sure it exists!', {
+        status: 404,
+      });
+
+    return res.json();
+  });

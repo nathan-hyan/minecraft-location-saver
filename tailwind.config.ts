@@ -26,6 +26,9 @@ export default {
       animation: {
         expand: 'expand 0.5s ease-in-out infinite',
       },
+      dropShadow: {
+        minecraft: '4px 4px 0px rgba(64, 64, 64, 1)',
+      },
     },
   },
   plugins: [],

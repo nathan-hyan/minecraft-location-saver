@@ -1,36 +1,16 @@
-import { Form, redirect, useNavigate, useNavigation } from 'react-router';
 import { useState } from 'react';
+import { useNavigate, useNavigation } from 'react-router';
 import { Button, Input, Select } from '~/components';
 import { CONSTRUCTION_TYPES, REALMS } from '~/constants';
-import { ConstructionTypes, Location, Realms } from '~/types';
+import type { Location } from '~/types';
 
-export async function action({ request }: { request: Request }) {
-  const formData = await request.formData();
-  const values = Object.fromEntries(formData);
-
-  const sanitizedOutput: Location = {
-    title: String(values.title),
-    description: String(values.description),
-    screenshotSrc: String(values.screenshotSrc),
-    realm: values.realm as Realms,
-    type: values.type as ConstructionTypes,
-    coordinates: {
-      x: Number(values.x),
-      y: values.y ? Number(values.y) : undefined,
-      z: Number(values.z),
-    },
-    createdAt: new Date().toISOString(),
-  };
-
-  fetch('http://localhost:3000/locations', {
-    method: 'POST',
-    body: JSON.stringify(sanitizedOutput),
-  });
-
-  return redirect('/');
+interface Props {
+  data?: Location;
 }
 
-export default function route() {
+function LocationForm({ data }: Props) {
+  console.log({ data });
+
   const [base64, setBase64] = useState('');
   const navigate = useNavigate();
   const { state } = useNavigation();
@@ -50,7 +30,7 @@ export default function route() {
   };
 
   return (
-    <Form method='post'>
+    <>
       <main className='flex flex-row justify-center gap-8'>
         <div className='w-1/2 rounded-xl bg-slate-800 p-4'>
           <input
@@ -123,6 +103,7 @@ export default function route() {
           Cancel
         </Button>
       </footer>
-    </Form>
+    </>
   );
 }
+export default LocationForm;

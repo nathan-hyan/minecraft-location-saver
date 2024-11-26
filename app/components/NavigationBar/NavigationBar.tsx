@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 function NavigationBar() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const {pathname} = useLocation();
-  const [splash, setSplash] = useState('If you\'re reading this, don\'t!');
+  const { pathname } = useLocation();
+  const [splash, setSplash] = useState("If you're reading this, don't!");
 
   useEffect(() => {
     const splashText = getSplashText(pathname);

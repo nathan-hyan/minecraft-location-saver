@@ -1,12 +1,14 @@
 import Card from '~/components/Card';
-import { LoaderFunctionArgs, type MetaFunction } from 'react-router';
 
-import { useLoaderData, useNavigation } from 'react-router';
+import type { LoaderFunctionArgs } from 'react-router';
+
+import { useNavigation, type MetaFunction } from 'react-router';
 
 import { getLocations } from './utils';
 import { ControlPanel, FloatingButton } from '~/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import type { Route } from './+types/root';
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,8 +33,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   };
 }
 
-export default function Index() {
-  const { locations, params } = useLoaderData<typeof loader>();
+export default function Index({ loaderData }: Route.ComponentProps) {
+  const { locations, params } = loaderData;
   const { state } = useNavigation();
 
   return (

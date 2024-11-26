@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -50,8 +50,8 @@ function Button({ children, ...props }: Props) {
 
   return (
     <button
-      className={`${props.disabled ? getDisabledVariantClass(props.variant) : getVariantClass(props.variant)} rounded-md px-4 py-2 font-bold`}
       {...props}
+      className={`${props.disabled ? getDisabledVariantClass(props.variant) : getVariantClass(props.variant)} rounded-md px-4 py-2 align-middle ${props.className}`}
       type={props.type || 'button'}
     >
       {children}

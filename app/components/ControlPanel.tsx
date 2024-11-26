@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router';
 import Select from './Select';
 import Button from './Button';
-import { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler } from 'react';
 
 interface Props {
   params: { pageSize: number; currentPage: number; totalPages: number };
@@ -46,7 +46,7 @@ function ControlPanel({
   };
 
   return (
-    <div className='mb-8 flex flex-row justify-between  gap-4 rounded-xl bg-slate-800 p-4'>
+    <div className='mb-8 flex flex-row justify-between gap-4 rounded-xl bg-slate-800 p-4'>
       <Select
         inline
         label='Page Size'
@@ -76,7 +76,7 @@ function ControlPanel({
       <div className='flex justify-center gap-8'>
         <Button
           variant='outlined-info'
-          disabled={currentPage <= 1}
+          disabled={!currentPage || currentPage <= 1}
           onClick={() => handlePageChange('subtract')}
         >
           {'<<'}
@@ -86,7 +86,7 @@ function ControlPanel({
         </p>
         <Button
           variant='outlined-info'
-          disabled={currentPage >= totalPages}
+          disabled={!currentPage || currentPage >= totalPages}
           onClick={() => handlePageChange('add')}
         >
           {'>>'}
