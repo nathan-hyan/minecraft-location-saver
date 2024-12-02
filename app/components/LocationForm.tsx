@@ -11,7 +11,7 @@ interface Props {
 function LocationForm({ data }: Props) {
   console.log({ data });
 
-  const [base64, setBase64] = useState('');
+  const [base64, setBase64] = useState(data?.screenshotSrc || '');
   const navigate = useNavigate();
   const { state } = useNavigation();
 
@@ -27,6 +27,13 @@ function LocationForm({ data }: Props) {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const getButtonText = () => {
+    if (data) {
+      return isSubmitting ? 'Updating...' : 'Update Location';
+    }
+    return isSubmitting ? 'Creating...' : 'Create Location';
   };
 
   return (
@@ -57,7 +64,7 @@ function LocationForm({ data }: Props) {
             name='image'
             accept='image/*'
             onChange={handleImageOnChange}
-            required
+            required={!data}
             className='mt-6 w-full rounded-xl border-2 border-gray-500 p-4 text-center'
           />
         </div>
@@ -67,33 +74,59 @@ function LocationForm({ data }: Props) {
             name='title'
             label='Location Name'
             placeholder='My beautiful home...'
-            required
+            defaultValue={data?.title || ''}
+            required={!data}
           />
           <Input
             name='description'
             label='Description'
             placeholder='Built it with my own two hands...'
-            required
+            defaultValue={data?.description || ''}
+            required={!data}
           />
-          <Select name='realm' label='Realm' options={REALMS} required />
+          <Select
+            name='realm'
+            label='Realm'
+            options={REALMS}
+            required={!data}
+            defaultValue={data?.realm}
+          />
           <Select
             name='type'
             label='Construction Type'
             options={CONSTRUCTION_TYPES}
+            defaultValue={data?.type}
           />
           <div className='flex flex-col gap-2'>
             <p>Coordinates:</p>
             <div className='flex w-full flex-row gap-2'>
-              <Input name='x' placeholder='X' required type='number' />
-              <Input name='y' placeholder='Y' type='number' />
-              <Input name='z' placeholder='Z' required type='number' />
+              <Input
+                name='x'
+                placeholder='X'
+                required={!data}
+                type='number'
+                defaultValue={data?.coordinates?.x}
+              />
+              <Input
+                name='y'
+                placeholder='Y'
+                type='number'
+                defaultValue={data?.coordinates?.y}
+              />
+              <Input
+                name='z'
+                placeholder='Z'
+                required={!data}
+                type='number'
+                defaultValue={data?.coordinates?.z}
+              />
             </div>
           </div>
         </div>
       </main>
       <footer className='mt-8 flex w-full justify-center gap-8 rounded-xl bg-slate-800 p-4'>
         <Button variant='success' type='submit' disabled={isSubmitting}>
-          {isSubmitting ? 'Creating...' : 'Create Location'}
+          {getButtonText()}
         </Button>
         <Button
           variant='outlined-error'
