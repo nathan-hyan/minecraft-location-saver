@@ -8,7 +8,7 @@ import { getLocations } from './utils';
 import { ControlPanel, FloatingButton } from '~/components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import type { Route } from './+types/root';
+import type { Route } from './+types/viewer';
 
 export const meta: MetaFunction = () => {
   return [

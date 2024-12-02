@@ -1,8 +1,9 @@
 import { Form, redirect } from 'react-router';
 import LocationForm from '~/components/LocationForm';
 import type { ConstructionTypes, Location, Realms } from '~/types';
+import type { Route } from './+types/create';
 
-export async function action({ request }: { request: Request }) {
+export const action = async ({ request }: Route.ActionArgs) => {
   const formData = await request.formData();
   const values = Object.fromEntries(formData);
 
@@ -20,13 +21,13 @@ export async function action({ request }: { request: Request }) {
     createdAt: new Date().toISOString(),
   };
 
-  fetch('http://localhost:3000/locations', {
-    method: 'POST',
+  fetch(`http://localhost:3000/locations`, {
+    method: 'PUT',
     body: JSON.stringify(sanitizedOutput),
   });
 
   return redirect('/');
-}
+};
 
 export default function route() {
   return (

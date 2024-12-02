@@ -2,8 +2,8 @@ import { calculateCoordinates } from '~/utils';
 import Chip from './Chip';
 import { type Location } from '../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Form, useNavigate } from 'react-router';
 
 interface Props {
   location: Location;
@@ -56,12 +56,34 @@ function Card({
           <Chip variant='success'>{realm}</Chip>
           {type && <Chip variant='warning'>{type}</Chip>}
         </div>
-        <Chip variant='info' className='cursor-pointer'>
-          <FontAwesomeIcon
-            icon={faEdit}
+
+        <div className='flex gap-2'>
+          <Chip
+            variant='info'
+            className='cursor-pointer'
             onClick={() => navigate(`/edit/${id}`)}
-          />
-        </Chip>
+          >
+            <FontAwesomeIcon icon={faEdit} />
+          </Chip>
+
+          <Form
+            action={`destroy/${id}`}
+            method='post'
+            onSubmit={(event) => {
+              const response = confirm(
+                'Do you really want to delete this location?'
+              );
+
+              if (!response) {
+                event.preventDefault();
+              }
+            }}
+          >
+            <Chip variant='error' className='cursor-pointer' type='submit'>
+              <FontAwesomeIcon icon={faTrash} />
+            </Chip>
+          </Form>
+        </div>
       </div>
     </div>
   );

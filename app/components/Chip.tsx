@@ -1,10 +1,7 @@
-import { ReactNode } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
-interface Props {
-  children: ReactNode;
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'success' | 'error' | 'warning' | 'info' | 'default';
-  className?: string;
-  onClick?: () => void;
 }
 
 function Chip({ children, className, onClick, variant = 'success' }: Props) {
@@ -24,12 +21,12 @@ function Chip({ children, className, onClick, variant = 'success' }: Props) {
   };
 
   return (
-    <div
+    <button
       onClick={onClick}
       className={`rounded-lg ${getVariantClassName()} px-2 py-1 text-xs text-slate-50 ${className}`}
     >
       {children}
-    </div>
+    </button>
   );
 }
 export default Chip;

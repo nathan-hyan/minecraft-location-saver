@@ -1,8 +1,8 @@
 import { Form, redirect } from 'react-router';
 import LocationForm from '~/components/LocationForm';
 import type { ConstructionTypes, Location, Realms } from '~/types';
-import { getSingleLocation } from '../utils';
-import type { Route } from './+types/route';
+import type { Route } from './+types/edit';
+import { getSingleLocation } from './utils';
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const location = await getSingleLocation(params.id);
