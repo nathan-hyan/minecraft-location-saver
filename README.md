@@ -131,7 +131,10 @@ export enum ConstructionTypes {
 ```
 
 ## Screenshots
-To-do
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/af9abee6-ddc1-4d2a-8b7c-a9ac71864724">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/3e017d45-d960-42a2-99e4-f872f41521fb">
+<img width="1512" alt="image" src="https://github.com/user-attachments/assets/796a9fbb-2ad8-4d7c-bfd0-f621d6c6de36">
+
 
 ## Future Improvements
 - Implement a better database
