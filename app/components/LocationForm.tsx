@@ -9,9 +9,8 @@ interface Props {
 }
 
 function LocationForm({ data }: Props) {
-  console.log({ data });
-
   const [base64, setBase64] = useState(data?.screenshotSrc || '');
+
   const navigate = useNavigate();
   const { state } = useNavigation();
 
