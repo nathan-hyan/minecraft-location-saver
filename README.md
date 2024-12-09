@@ -14,12 +14,10 @@ A proof-of-concept app for storing coordinates with screenshots and sorting them
     -   [Prerequisites](#prerequisites)
     -   [Installation](#installation)
     -   [Running the App](#running-the-app)
-4.  [Project Structure](#project-structure)
-5.  [Example Usage](#example-usage)
-6.  [Screenshots](#screenshots)
-7.  [Future Improvements](#future-improvements)
-8.  [Contributing](#contributing)
-9.  [License](#license)
+4.  [Screenshots](#screenshots)
+5.  [Future Improvements](#future-improvements)
+6.  [Contributing](#contributing)
+7.  [License](#license)
 
 ----------
 
