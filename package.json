@@ -25,7 +25,7 @@
     "json-server": "^1.0.0-beta.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.1.1",
+    "react-router": "^7.5.2",
     "use-dehydrated-state": "^0.1.0"
   },
   "devDependencies": {
